@@ -54,7 +54,42 @@ employee_attrition_prediction/
 └── README.md                 # This file
 ```
 
-## Setup Instructions
+
+## Using Python Scripts in Power BI
+
+To use the preprocessing and feature engineering scripts in Power BI, you must configure Power BI to use the Python executable from your virtual environment (venv):
+
+1. **Locate your venv Python executable:**
+   - On Windows, after creating your venv, the path will be:
+     ```
+     <your_project_path>\venv\Scripts\python.exe
+     ```
+
+2. **Configure Power BI to use this Python:**
+   - Open Power BI Desktop
+   - Go to **File > Options and settings > Options**
+   - Under **Global > Python scripting**, set the **Detected Python home directories** to your venv's `python.exe` path above
+
+3. **Install all required packages in your venv:**
+   - Activate your venv in a terminal:
+     ```powershell
+     .\venv\Scripts\Activate.ps1
+     pip install -r requirements.txt
+     ```
+
+4. **Use Python scripts in Power BI:**
+   - In Power BI, use the **Python script** data source and write code that imports your preprocessing and feature engineering modules from the `src` folder.
+   - Example Power BI script:
+     ```python
+     import sys
+     sys.path.append(r'<your_project_path>\\src')
+     from preprocessing import DataPreprocessor
+     from feature_engineering import FeatureEngineer
+     import pandas as pd
+     # Load your data and run pipeline as needed
+     ```
+
+**Note:** Any changes to your Python code or dependencies require you to restart Power BI or refresh the Python environment.
 
 
 
