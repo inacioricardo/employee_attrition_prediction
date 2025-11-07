@@ -9,6 +9,52 @@ from typing import Tuple, List, Optional
 
 
 class DataPreprocessor:
+
+    def binary_encode_columns(self, df: pd.DataFrame, columns: list) -> pd.DataFrame:
+        """
+        Encode specified columns as binary (0/1) columns.
+        Args:
+            df: Input dataframe
+            columns: List of columns to binary encode
+        Returns:
+            pd.DataFrame: Dataframe with binary encoded columns
+        """
+        df_encoded = df.copy()
+        for col in columns:
+            if col in df_encoded.columns:
+                # If only two unique values, map to 0/1
+                unique_vals = df_encoded[col].dropna().unique()
+                if len(unique_vals) == 2:
+                    # Try to map 'Yes'/'No', 'Male'/'Female', 'Y'/'N', etc.
+                    val_map = None
+                    if set(unique_vals) == set(['Yes', 'No']):
+                        val_map = {'No': 0, 'Yes': 1}
+                    elif set(unique_vals) == set(['Y', 'N']):
+                        val_map = {'N': 0, 'Y': 1}
+                    elif set(unique_vals) == set(['Male', 'Female']):
+                        val_map = {'Female': 0, 'Male': 1}
+                    else:
+                        # Default: sort and assign 0/1
+                        sorted_vals = sorted(unique_vals)
+                        val_map = {sorted_vals[0]: 0, sorted_vals[1]: 1}
+                    df_encoded[col + '_bin'] = df_encoded[col].map(val_map)
+        return df_encoded
+
+    def one_hot_encode_columns(self, df: pd.DataFrame, columns: list) -> pd.DataFrame:
+        """
+        Perform one-hot encoding on specified columns.
+        Args:
+            df: Input dataframe
+            columns: List of columns to one-hot encode
+        Returns:
+            pd.DataFrame: Dataframe with one-hot encoded columns
+        """
+        df_encoded = df.copy()
+        # Only encode columns that exist in the dataframe
+        cols_to_encode = [col for col in columns if col in df_encoded.columns]
+        if cols_to_encode:
+            df_encoded = pd.get_dummies(df_encoded, columns=cols_to_encode, drop_first=False, prefix=cols_to_encode)
+        return df_encoded
     """Class to handle data preprocessing operations."""
     
     def __init__(self):

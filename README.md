@@ -56,57 +56,7 @@ employee_attrition_prediction/
 
 ## Setup Instructions
 
-### 1. Clone or Navigate to the Repository
 
-```bash
-cd c:\DEV\employee_attrition_prediction
-```
-
-### 2. Create a Virtual Environment
-
-**Windows (PowerShell):**
-```powershell
-python -m venv venv
-.\venv\Scripts\Activate.ps1
-```
-
-**Linux/Mac:**
-```bash
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### 3. Install Dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-### 4. Set Up Environment Variables
-
-```bash
-# Copy the example environment file
-cp .env.example .env
-# Edit .env with your specific paths if needed
-```
-
-### 5. Move the CSV File
-
-Move your CSV file to the data directory:
-```powershell
-# Windows PowerShell
-Move-Item WA_Fn-UseC_-HR-Employee-Attrition.csv data\raw\
-```
-
-### 6. Launch Jupyter Notebook
-
-```bash
-jupyter notebook
-```
-
-Then open `notebooks/01_exploratory_data_analysis.ipynb` to start exploring the data.
-
-## Analysis Workflow
 
 1. **Exploratory Data Analysis (EDA)**
    - Data loading and inspection
@@ -143,7 +93,7 @@ Then open `notebooks/01_exploratory_data_analysis.ipynb` to start exploring the 
 
 ## Key Technologies
 
-- **Python 3.9+**
+- **Python 3.11** (required)
 - **Data Analysis**: Pandas, NumPy
 - **Visualization**: Matplotlib, Seaborn, Plotly
 - **Machine Learning**: Scikit-learn, XGBoost, LightGBM
