@@ -12,13 +12,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Data loading utilities (`src/load_data.py`)
 - Comprehensive preprocessing pipeline (`src/preprocessing.py`)
 - Class imbalance handling with SMOTE (`src/imbalance_handling.py`)
-- Model training and visualization utilities (`src/train_model.py`)
+- Model training and visualisation utilities (`src/train_model.py`)
 - Complete end-to-end Jupyter notebook (`notebooks/01_attrition_modeling.ipynb`)
 - Enhanced package structure with proper `__init__.py`
 - Comprehensive README with setup instructions
 - Requirements file with exact version specifications
 - Project structure documentation
-- CLI interface for automated analysis (`run_analysis.py`)
 - Development automation with Makefile
 - Professional documentation (CONTRIBUTING.md, DEPLOYMENT.md)
 
@@ -27,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Handle categorical encoding with meaningful feature names
 - Address class imbalance using SMOTE oversampling
 - Train logistic regression model for attrition prediction
-- Generate feature importance and correlation visualizations
+- Generate feature importance and correlation visualisations
 - Modular, reusable code architecture
 - Professional package structure for easy imports
 

@@ -94,7 +94,7 @@ def preprocess_pipeline(df, target_col='Attrition', scale_features=True, remove_
 def preprocess_attrition_data(df):
     """
     Complete preprocessing pipeline specific to attrition data.
-    Handles categorical encoding with meaningful names for visualization.
+    Handles categorical encoding with meaningful names for visualisation.
     Education is kept as numeric (1-5 ordinal scale).
     
     Returns:

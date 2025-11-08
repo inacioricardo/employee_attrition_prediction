@@ -13,9 +13,9 @@ from .preprocessing import preprocess_attrition_data, binary_encode_columns, one
 from .imbalance_handling import balance_with_smote, print_class_distribution
 from .train_model import (
     train_logistic_regression,
-    visualize_feature_importance,
+    visualise_feature_importance,
     visualize_correlation_matrix,
-    analyze_top_correlations,
+    analyse_top_correlations,
     complete_analysis_workflow,
     train_best_model
 )
@@ -37,9 +37,9 @@ __all__ = [
     
     # Model training and analysis
     'train_logistic_regression',
-    'visualize_feature_importance',
+    'visualise_feature_importance',
     'visualize_correlation_matrix',
-    'analyze_top_correlations',
+    'analyse_top_correlations',
     'complete_analysis_workflow',
     'train_best_model'
 ]

@@ -35,7 +35,7 @@ Thank you for your interest in contributing to this project! This document provi
 - `notebooks/` - Jupyter notebooks for analysis
 - `data/` - Data files (not tracked in git)
 - `models/` - Saved model artifacts
-- `outputs/` - Generated outputs and visualizations
+- `outputs/` - Generated outputs and visualisations
 
 ## Coding Standards
 

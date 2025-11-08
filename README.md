@@ -4,7 +4,7 @@ A data science project for analyzing and predicting employee attrition using mac
 
 ## Project Overview
 
-This project analyzes HR employee attrition data to identify patterns and build predictive models that can help organizations understand and reduce employee turnover. The project is structured with modular Python scripts for data processing and machine learning, along with comprehensive Jupyter notebooks for analysis and visualization.
+This project analyses HR employee attrition data to identify patterns and build predictive models that can help organisations understand and reduce employee turnover. The project is structured with modular Python scripts for data processing and machine learning, along with comprehensive Jupyter notebooks for analysis and visualisation.
 
 ## Dataset
 
@@ -36,7 +36,7 @@ employee_attrition_prediction/
 ├── notebooks/
 │   └── 01_attrition_modeling.ipynb   # Complete modeling workflow
 ├── src/
-│   ├── __init__.py                   # Package initialization
+│   ├── __init__.py                   # Package initialisation
 │   ├── load_data.py                  # Data loading utilities
 │   ├── preprocessing.py              # Data preprocessing and encoding pipeline
 │   ├── imbalance_handling.py         # Class imbalance handling with SMOTE
@@ -44,11 +44,9 @@ employee_attrition_prediction/
 │   └── __pycache__/                 # Python bytecode cache
 ├── models/                           # Directory for saved model artifacts
 ├── outputs/
-│   └── figures/                      # Generated plots and visualizations
+│   └── figures/                      # Generated plots and visualisations
 ├── requirements.txt           # Python dependencies
-├── setup.py                   # Package installation script
 ├── Makefile                   # Development automation tasks
-├── run_analysis.py            # CLI script for complete analysis
 ├── CHANGELOG.md               # Version history and changes
 ├── CONTRIBUTING.md            # Development guidelines
 ├── DEPLOYMENT.md              # Deployment checklist and guide
@@ -62,15 +60,24 @@ employee_attrition_prediction/
    ```bash
    git clone <repository-url>
    cd employee_attrition_prediction
+   
+   # Create and activate virtual environment (recommended)
+   python -m venv venv
+   
+   # Windows
+   venv\Scripts\activate
+   # Linux/Mac
+   source venv/bin/activate
+   
+   # Install dependencies
    pip install -r requirements.txt
    ```
 
-2. **Run the complete workflow:**
-   - **Option A - Jupyter Notebook**: Open `notebooks/01_attrition_modeling.ipynb` in Jupyter and run all cells
-   - **Option B - Command Line**: Run `python run_analysis.py` for automated analysis
-   - **Option C - Python Module**: Use `python -m src.train_model` for training pipeline
+2. **Run the analysis:**
+   - **Jupyter Notebook**: Open `notebooks/01_attrition_modeling.ipynb` in Jupyter and run all cells
+   - **Direct Python**: Import and use the modular functions in your scripts
 
-3. **Using the package in your code:**
+3. **Using the package functions:**
    ```python
    from src import load_attrition_data, preprocess_attrition_data, complete_analysis_workflow
    
@@ -79,14 +86,17 @@ employee_attrition_prediction/
    df_processed = preprocess_attrition_data(df)
    
    # Run complete analysis
-   results = complete_analysis_workflow(X, y, visualize=True)
+   results = complete_analysis_workflow(X, y, visualise=True)
    ```
+
+> **💡 Why Virtual Environment?**  
+> Using a virtual environment isolates this project's dependencies from your system Python, preventing version conflicts and ensuring reproducible results. It's considered a Python best practice for all projects.
 
 ## Modular Components
 
 ### Core Scripts
 
-- **`src/load_data.py`**: Centralized data loading functionality
+- **`src/load_data.py`**: Centralised data loading functionality
   - `load_attrition_data()`: Loads and returns the HR dataset
   
 - **`src/preprocessing.py`**: Comprehensive data preprocessing and encoding
@@ -128,10 +138,10 @@ employee_attrition_prediction/
    - Train logistic regression model
    - Cross-validation and performance metrics
 
-5. **Feature Analysis & Visualization**
+5. **Feature Analysis & Visualisation**
    - Feature importance analysis with meaningful names
    - Correlation heatmap showing relationship strengths
-   - Business-interpretable visualizations
+   - Business-interpretable visualisations
 
 ## Key Features
 
@@ -141,9 +151,10 @@ employee_attrition_prediction/
   - **Binary Features**: Yes/No and gender variables appropriately encoded
 - **Enhanced Feature Engineering**: 35 → 51 features with meaningful business names
 - **Class Imbalance Handling**: SMOTE implementation for balanced training (16.1% → 50% attrition)
+- **Interactive Analysis**: Complete Jupyter notebook workflow for exploration and visualisation
 - **Modular Design**: Reusable components for preprocessing, modeling, and evaluation
 - **Business Interpretation**: Clear, descriptive feature names for stakeholder communication
-- **Professional Structure**: Complete deployment-ready package with documentation
+- **Professional Structure**: Complete package with comprehensive documentation
 
 ## Analysis Workflow
 ## Analysis Workflow
@@ -183,10 +194,10 @@ The project follows a systematic approach to employee attrition prediction:
    - **Correlation Analysis**: Understand relationships between features
    - **Business Interpretation**: Generate actionable insights for HR teams
 
-6. **Visualization & Reporting**
+6. **Visualisation & Reporting**
    - Feature importance plots with meaningful names
    - Correlation heatmaps showing feature relationships
-   - Business-friendly visualizations for stakeholder communication
+   - Business-friendly visualisations for stakeholder communication
 
 ## Key Technologies
 

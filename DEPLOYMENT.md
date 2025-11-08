@@ -28,16 +28,16 @@ This checklist ensures the Employee Attrition Prediction project is ready for de
 ## ✅ Data & Models
 
 - [x] .gitkeep files to maintain directory structure
-- [x] Data directory properly organized (raw/processed)
+- [x] Data directory properly organised (raw/processed)
 - [x] Model artifacts directory prepared
-- [x] Outputs directory for visualizations
+- [x] Outputs directory for visualisations
 
 ## ✅ Version Control
 
 - [x] Comprehensive .gitignore for Python projects
 - [x] No sensitive files committed (.env excluded)
 - [x] Clean repository without cache files
-- [x] Proper file organization
+- [x] Proper file organisation
 
 ## ✅ Deployment Tools
 
@@ -58,14 +58,14 @@ This checklist ensures the Employee Attrition Prediction project is ready for de
 The project is now clean, well-documented, and ready for:
 - GitHub repository publishing
 - PyPI package distribution
-- Docker containerization
+- Docker containerisation
 - CI/CD pipeline integration
 - Production deployment
 
 ## Next Steps (Optional)
 
 - [ ] Add continuous integration (GitHub Actions)
-- [ ] Add Docker containerization
+- [ ] Add Docker containerisation
 - [ ] Add model versioning (MLflow)
 - [ ] Add API endpoint (FastAPI)
 - [ ] Add web interface (Streamlit)

@@ -1,5 +1,5 @@
 """
-Train models to predict employee attrition with visualization capabilities.
+Train models to predict employee attrition with visualisation capabilities.
 This script can be imported and used in a notebook or as a standalone module.
 """
 import pandas as pd
@@ -29,7 +29,7 @@ def train_logistic_regression(X_train, X_test, y_train, y_test, max_iter=1000):
     
     return model, y_pred, y_proba
 
-def visualize_feature_importance(model, X_train, top_n=15, figsize=(10, 6)):
+def visualise_feature_importance(model, X_train, top_n=15, figsize=(10, 6)):
     """
     Visualize the most important features from a trained model.
     
@@ -50,7 +50,7 @@ def visualize_feature_importance(model, X_train, top_n=15, figsize=(10, 6)):
     # Get top features by absolute importance
     top_features = feature_importance.abs().sort_values(ascending=False).head(top_n)
     
-    # Create visualization
+    # Create visualisation
     plt.figure(figsize=figsize)
     sns.barplot(x=top_features.values, y=top_features.index, palette='coolwarm')
     plt.title('Top Features Predicting Attrition (Model Coefficients)')
@@ -79,9 +79,9 @@ def visualize_correlation_matrix(X_train, figsize=(16, 12)):
     
     return corr_matrix
 
-def analyze_top_correlations(X_train, top_n=10, figsize=(10, 6)):
+def analyse_top_correlations(X_train, top_n=10, figsize=(10, 6)):
     """
-    Analyze and visualize the top correlated feature pairs.
+    Analyse and visualise the top correlated feature pairs.
     
     Args:
         X_train: Training features DataFrame
@@ -102,11 +102,11 @@ def analyze_top_correlations(X_train, top_n=10, figsize=(10, 6)):
     pairs_sorted = sorted(pairs, key=lambda x: x[1], reverse=True)
     top_pairs = pairs_sorted[:top_n]
     
-    # Prepare data for visualization
+    # Prepare data for visualisation
     pair_labels = [f'{a} & {b}' for (a, b), _ in top_pairs]
     pair_values = [v for (_, v) in top_pairs]
     
-    # Create visualization
+    # Create visualisation
     plt.figure(figsize=figsize)
     sns.barplot(x=pair_values, y=pair_labels, palette='coolwarm')
     plt.title(f'Top {top_n} Feature Pairs Most Correlated')
@@ -178,7 +178,7 @@ def train_best_model(X, y, random_state=42, verbose=True):
         print(f"\nBest model: {best_name} (ROC AUC: {best_score:.4f})")
     return best_model, best_metrics
 
-def complete_analysis_workflow(X, y, test_size=0.2, random_state=42, visualize=True):
+def complete_analysis_workflow(X, y, test_size=0.2, random_state=42, visualise=True):
     """
     Complete workflow for training a model and analyzing results.
     
@@ -187,7 +187,7 @@ def complete_analysis_workflow(X, y, test_size=0.2, random_state=42, visualize=T
         y: Target vector
         test_size: Proportion of data for testing
         random_state: Random seed for reproducibility
-        visualize: Whether to create visualizations
+        visualise: Whether to create visualisations
     
     Returns:
         dict: Contains model, predictions, and analysis results
@@ -208,7 +208,7 @@ def complete_analysis_workflow(X, y, test_size=0.2, random_state=42, visualize=T
     print("\nClassification Report:")
     print(classification_report(y_test, y_pred))
     
-    # Create visualizations if requested
+    # Create visualisations if requested
     results = {
         'model': model,
         'X_train': X_train,
@@ -221,11 +221,11 @@ def complete_analysis_workflow(X, y, test_size=0.2, random_state=42, visualize=T
         'roc_auc': roc_auc
     }
     
-    if visualize:
-        print("\nGenerating visualizations...")
+    if visualise:
+        print("\nGenerating visualisations...")
         
         # Feature importance
-        top_features = visualize_feature_importance(model, X_train)
+        top_features = visualise_feature_importance(model, X_train)
         results['top_features'] = top_features
         
         # Correlation matrix
@@ -233,7 +233,7 @@ def complete_analysis_workflow(X, y, test_size=0.2, random_state=42, visualize=T
         results['correlation_matrix'] = corr_matrix
         
         # Top correlations
-        top_correlations = analyze_top_correlations(X_train)
+        top_correlations = analyse_top_correlations(X_train)
         results['top_correlations'] = top_correlations
     
     return results
@@ -268,7 +268,7 @@ def main():
         X_bal, y_bal = balance_with_smote(X, y)
         
         # Run complete analysis
-        results = complete_analysis_workflow(X_bal, y_bal, visualize=True)
+        results = complete_analysis_workflow(X_bal, y_bal, visualise=True)
         
         print(f"\n✅ Analysis completed successfully!")
         print(f"Final Accuracy: {results['accuracy']:.4f}")
