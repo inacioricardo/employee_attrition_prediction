@@ -230,16 +230,6 @@ The analysis provides comprehensive insights into key factors driving employee a
 - Balanced dataset preparation improves minority class (attrition) prediction
 - Modular code structure supports production deployment and maintenance
 
-## Future Enhancements
-
-- **Advanced Models**: Random Forest, XGBoost, Neural Networks for improved prediction
-- **Feature Engineering**: Interaction features, polynomial features, advanced transformations  
-- **Model Deployment**: REST API, containerization, cloud deployment pipeline
-- **Real-time Prediction**: Streaming data processing and live prediction capabilities
-- **Interactive Dashboard**: Web-based visualization and prediction interface
-- **A/B Testing Framework**: Model comparison and performance monitoring
-- **Automated Retraining**: ML pipeline with data drift detection and model updates
-
 ## Contributing
 
 This is a personal data science project. Feel free to fork and adapt for your needs.
