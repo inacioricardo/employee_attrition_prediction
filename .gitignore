@@ -48,6 +48,38 @@ data/raw/*.csv
 data/processed/*.csv
 data/raw/*.parquet
 data/processed/*.parquet
+
+# Model files
+models/*.pkl
+models/*.joblib
+models/*.h5
+models/*.json
+
+# Output files
+outputs/figures/*.png
+outputs/figures/*.jpg
+outputs/figures/*.pdf
+outputs/reports/*.html
+outputs/reports/*.pdf
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.temp
+*.log
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 
@@ -67,11 +99,6 @@ outputs/figures/*.pdf
 # OS files
 .DS_Store
 Thumbs.db
-
-# Testing
-.pytest_cache/
-.coverage
-htmlcov/
 
 # Logs
 *.log

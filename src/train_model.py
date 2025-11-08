@@ -237,3 +237,47 @@ def complete_analysis_workflow(X, y, test_size=0.2, random_state=42, visualize=T
         results['top_correlations'] = top_correlations
     
     return results
+
+
+def main():
+    """
+    Main function for command-line usage.
+    Demonstrates the complete workflow.
+    """
+    import sys
+    from pathlib import Path
+    
+    # Add parent directory to path for imports
+    sys.path.append(str(Path(__file__).parent.parent))
+    
+    from src import load_attrition_data, preprocess_attrition_data, balance_with_smote
+    
+    print("🤖 Employee Attrition Prediction - Training Pipeline")
+    print("=" * 55)
+    
+    try:
+        # Load and preprocess data
+        df = load_attrition_data()
+        df_processed = preprocess_attrition_data(df)
+        
+        # Prepare features and target
+        X = df_processed.drop(columns=['Attrition_bin'])
+        y = df_processed['Attrition_bin']
+        
+        # Apply SMOTE
+        X_bal, y_bal = balance_with_smote(X, y)
+        
+        # Run complete analysis
+        results = complete_analysis_workflow(X_bal, y_bal, visualize=True)
+        
+        print(f"\n✅ Analysis completed successfully!")
+        print(f"Final Accuracy: {results['accuracy']:.4f}")
+        print(f"Final ROC AUC: {results['roc_auc']:.4f}")
+        
+    except Exception as e:
+        print(f"❌ Error: {str(e)}")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()
