@@ -7,6 +7,10 @@ import numpy as np
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 
 def binary_encode_columns(df, columns):
+    """
+    Encode binary categorical columns to 0/1 values.
+    Creates new columns with '_bin' suffix.
+    """
     df_encoded = df.copy()
     for col in columns:
         if col in df_encoded.columns:
@@ -26,11 +30,43 @@ def binary_encode_columns(df, columns):
     return df_encoded
 
 def one_hot_encode_columns(df, columns):
+    """
+    One-hot encode categorical columns with descriptive names.
+    Uses column prefixes to maintain meaningful feature names.
+    """
     df_encoded = df.copy()
     cols_to_encode = [col for col in columns if col in df_encoded.columns]
     if cols_to_encode:
         df_encoded = pd.get_dummies(df_encoded, columns=cols_to_encode, drop_first=False, prefix=cols_to_encode)
     return df_encoded
+
+def preprocess_attrition_data(df):
+    """
+    Complete preprocessing pipeline specific to attrition data.
+    Handles categorical encoding with meaningful names for visualization.
+    
+    Returns:
+        df_processed: Preprocessed DataFrame ready for modeling
+    """
+    # Define column groups
+    one_hot_cols = ["BusinessTravel", "Department", "MaritalStatus", "EducationField", "JobRole"]
+    binary_cols = ["Attrition", "OverTime", "Gender", "Over18"]
+    
+    # Apply one-hot encoding with descriptive names
+    df_encoded = pd.get_dummies(df, columns=one_hot_cols, prefix=one_hot_cols, drop_first=False)
+    
+    # Apply binary encoding
+    df_encoded = binary_encode_columns(df_encoded, binary_cols)
+    
+    # Drop original binary columns after encoding
+    for col in binary_cols:
+        if col in df_encoded.columns:
+            df_encoded = df_encoded.drop(columns=[col])
+    
+    # Apply final preprocessing pipeline
+    df_processed = preprocess_pipeline(df_encoded, target_col="Attrition_bin", scale_features=True, remove_constants=True)
+    
+    return df_processed
 
 def handle_missing_values(df, numerical_cols, categorical_cols, strategy='mean'):
     df_clean = df.copy()
@@ -81,4 +117,32 @@ def preprocess_pipeline(df, target_col='Attrition', scale_features=True, remove_
         cols_to_scale = [col for col in numerical_cols if col in df_processed.columns and col != target_col]
         if cols_to_scale:
             df_processed, _ = scale_numerical_features(df_processed, cols_to_scale, fit=True)
+    return df_processed
+
+def preprocess_attrition_data(df):
+    """
+    Complete preprocessing pipeline specific to attrition data.
+    Handles categorical encoding with meaningful names for visualization.
+    
+    Returns:
+        df_processed: Preprocessed DataFrame ready for modeling
+    """
+    # Define column groups
+    one_hot_cols = ["BusinessTravel", "Department", "MaritalStatus", "EducationField", "JobRole"]
+    binary_cols = ["Attrition", "OverTime", "Gender", "Over18"]
+    
+    # Apply one-hot encoding with descriptive names
+    df_encoded = pd.get_dummies(df, columns=one_hot_cols, prefix=one_hot_cols, drop_first=False)
+    
+    # Apply binary encoding
+    df_encoded = binary_encode_columns(df_encoded, binary_cols)
+    
+    # Drop original binary columns after encoding
+    for col in binary_cols:
+        if col in df_encoded.columns:
+            df_encoded = df_encoded.drop(columns=[col])
+    
+    # Apply final preprocessing pipeline
+    df_processed = preprocess_pipeline(df_encoded, target_col="Attrition_bin", scale_features=True, remove_constants=True)
+    
     return df_processed

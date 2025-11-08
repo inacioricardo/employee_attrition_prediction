@@ -4,7 +4,7 @@ A data science project for analyzing and predicting employee attrition using mac
 
 ## Project Overview
 
-This project analyzes HR employee attrition data to identify patterns and build predictive models that can help organizations understand and reduce employee turnover.
+This project analyzes HR employee attrition data to identify patterns and build predictive models that can help organizations understand and reduce employee turnover. The project is structured with modular Python scripts for data processing and machine learning, along with comprehensive Jupyter notebooks for analysis and visualization.
 
 ## Dataset
 
@@ -12,12 +12,20 @@ This project analyzes HR employee attrition data to identify patterns and build 
 **License:** DbCL (Database Contents License) v1.0  
 **Attribution:** Fictional dataset created by IBM Data Scientists
 
-The dataset `WA_Fn-UseC_-HR-Employee-Attrition.csv` contains employee information including:
-- Demographics (Age, Gender, etc.)
-- Job-related factors (Department, Job Role, etc.)
-- Compensation (Monthly Income, Salary Hike, etc.)
-- Work-life factors (Work-Life Balance, Job Satisfaction, etc.)
-- Attrition status (Target variable)
+The dataset `WA_Fn-UseC_-HR-Employee-Attrition.csv` contains 1,470 employee records with 35 features including:
+- **Demographics**: Age, Gender, Marital Status
+- **Job Details**: Department, Job Role, Job Level, Years at Company
+- **Performance**: Performance Rating, Job Satisfaction, Work-Life Balance
+- **Compensation**: Monthly Income, Stock Option Level
+- **Career**: Years in Current Role, Years with Current Manager
+- **Other**: Distance from Home, Overtime, Travel Frequency
+
+**Important Data Notes:**
+- **EducationField**: Contains descriptive values (e.g., "Life Sciences", "Medical", "Technical Degree")
+- **Education**: Contains numeric codes (1-5) representing education levels
+- The project uses EducationField for meaningful feature interpretation in visualizations
+
+**Target Variable**: Attrition (Yes/No) - whether an employee has left the company.
 
 See [data/DATA_ATTRIBUTION.md](data/DATA_ATTRIBUTION.md) for complete dataset information and proper citation.
 
@@ -25,123 +33,155 @@ See [data/DATA_ATTRIBUTION.md](data/DATA_ATTRIBUTION.md) for complete dataset in
 
 ```
 employee_attrition_prediction/
-│
 ├── data/
-│   ├── raw/                    # Original, immutable data
-│   └── processed/              # Cleaned and processed data
-│
-├── notebooks/                  # Jupyter notebooks for exploration
-│   └── 01_exploratory_data_analysis.ipynb
-│
-├── src/                        # Source code modules
-│   ├── __init__.py
-│   ├── data_loader.py         # Data loading utilities
-│   ├── preprocessing.py       # Data preprocessing functions
-│   ├── feature_engineering.py # Feature creation functions
-│   └── model.py               # Model training and evaluation
-│
-├── tests/                      # Unit tests
-│   └── __init__.py
-│
-├── models/                     # Trained models
-│
-├── outputs/                    # Generated outputs
-│   └── figures/               # Visualizations and plots
-│
+│   ├── raw/                           # Original dataset (WA_Fn-UseC_-HR-Employee-Attrition.csv)
+│   ├── processed/                     # Cleaned and preprocessed data
+│   └── DATA_ATTRIBUTION.md           # Dataset license and attribution
+├── notebooks/
+│   ├── 01_attrition_modeling.ipynb   # Initial exploratory analysis
+│   └── 02_attrition_modeling.ipynb   # Complete modeling workflow
+├── src/
+│   ├── __init__.py                   # Package initialization
+│   ├── load_data.py                  # Data loading utilities
+│   ├── preprocessing.py              # Data preprocessing and encoding pipeline
+│   ├── imbalance_handling.py         # Class imbalance handling with SMOTE
+│   ├── train_model.py               # Model training and evaluation
+│   └── __pycache__/                 # Python bytecode cache
+├── models/                           # Directory for saved model artifacts
+├── outputs/
+│   └── figures/                      # Generated plots and visualizations
+├── tests/
+│   └── __init__.py                  # Test package initialization
 ├── requirements.txt           # Python dependencies
-├── .gitignore                # Git ignore rules
-├── .env.example              # Environment variables template
+├── LICENSE                    # MIT License
 └── README.md                 # This file
 ```
 
+## Quick Start
 
-## Using Python Scripts in Power BI
+1. **Clone and setup environment:**
+   ```bash
+   git clone <repository-url>
+   cd employee_attrition_prediction
+   pip install -r requirements.txt
+   ```
 
-To use the preprocessing and feature engineering scripts in Power BI, you must configure Power BI to use the Python executable from your virtual environment (venv):
+2. **Run the complete workflow:**
+   - Open `notebooks/02_attrition_modeling.ipynb` in Jupyter
+   - Run all cells to execute the full pipeline from data loading to visualization
 
-1. **Locate your venv Python executable:**
-   - On Windows, after creating your venv, the path will be:
-     ```
-     <your_project_path>\venv\Scripts\python.exe
-     ```
+## Modular Components
 
-2. **Configure Power BI to use this Python:**
-   - Open Power BI Desktop
-   - Go to **File > Options and settings > Options**
-   - Under **Global > Python scripting**, set the **Detected Python home directories** to your venv's `python.exe` path above
+### Core Scripts
 
-3. **Install all required packages in your venv:**
-   - Activate your venv in a terminal:
-     ```powershell
-     .\venv\Scripts\Activate.ps1
-     pip install -r requirements.txt
-     ```
+- **`src/load_data.py`**: Centralized data loading functionality
+  - `load_attrition_data()`: Loads and returns the HR dataset
+  
+- **`src/preprocessing.py`**: Data preprocessing and encoding
+  - `one_hot_encode_columns()`: One-hot encoding for categorical variables
+  - `binary_encode_columns()`: Binary encoding for high-cardinality categories
+  - `preprocess_pipeline()`: Complete preprocessing workflow
 
-4. **Use Python scripts in Power BI:**
-   - In Power BI, use the **Python script** data source and write code that imports your preprocessing and feature engineering modules from the `src` folder.
-   - Example Power BI script:
-     ```python
-     import sys
-     sys.path.append(r'<your_project_path>\\src')
-     from preprocessing import DataPreprocessor
-     from feature_engineering import FeatureEngineer
-     import pandas as pd
-     # Load your data and run pipeline as needed
-     ```
+- **`src/imbalance_handling.py`**: Class imbalance handling
+  - `handle_imbalance()`: Applies SMOTE for balanced training data
 
-**Note:** Any changes to your Python code or dependencies require you to restart Power BI or refresh the Python environment.
+- **`src/train_model.py`**: Model training and evaluation
+  - `train_logistic_regression()`: Trains and evaluates logistic regression model
 
+### Notebook Workflow
 
+**`notebooks/02_attrition_modeling.ipynb`** provides a complete end-to-end workflow:
 
-1. **Exploratory Data Analysis (EDA)**
-   - Data loading and inspection
-   - Missing value analysis
-   - Univariate and bivariate analysis
-   - Correlation analysis
-   - Visualization of key patterns
+1. **Data Loading & Exploration**
+   - Load dataset using modular script
+   - Display basic statistics and structure
 
 2. **Data Preprocessing**
-   - Handle missing values
-   - Encode categorical variables
-   - Feature scaling
-   - Train-test split
+   - Handle categorical encoding (one-hot for EducationField, binary for others)
+   - Feature scaling and normalization
+   - Creates meaningful column names for visualization
 
-3. **Feature Engineering**
-   - Create derived features
-   - Select relevant features
-   - Handle class imbalance
+3. **Class Imbalance Handling**
+   - Apply SMOTE to balance training data
+   - Maintains test set distribution
 
-4. **Model Development**
-   - Train multiple models (Logistic Regression, Random Forest, XGBoost, etc.)
-   - Hyperparameter tuning
-   - Cross-validation
+4. **Model Training**
+   - Train logistic regression model
+   - Cross-validation and performance metrics
 
-5. **Model Evaluation**
-   - Performance metrics (Accuracy, Precision, Recall, F1-Score, ROC-AUC)
-   - Feature importance analysis
-   - Model interpretation with SHAP
+5. **Feature Analysis & Visualization**
+   - Feature importance analysis with meaningful names
+   - Correlation heatmap showing relationship strengths
+   - Business-interpretable visualizations
 
-6. **Deployment Preparation**
-   - Save best model
-   - Create prediction pipeline
-   - Documentation
+## Key Features
+
+- **Modular Design**: Reusable components for preprocessing, modeling, and evaluation
+- **Meaningful Visualizations**: Feature names like "EducationField_Life Sciences" instead of generic codes
+- **Class Imbalance Handling**: SMOTE implementation for balanced training
+- **Business Interpretation**: Clear, descriptive feature names for stakeholder communication
+- **Complete Workflow**: End-to-end pipeline from raw data to insights
+
+## Analysis Workflow
+## Analysis Workflow
+
+The project follows a systematic approach to employee attrition prediction:
+
+1. **Data Loading & Exploration**
+   - Load HR dataset with 1,470 employee records
+   - Examine data structure, missing values, and distributions
+   - Understand categorical vs numerical features
+
+2. **Data Preprocessing**
+   - **Categorical Encoding**: 
+     - One-hot encoding for EducationField (creates descriptive columns)
+     - Binary encoding for other categorical variables
+   - **Feature Scaling**: StandardScaler for numerical features
+   - **Data Splitting**: Train-test split for model validation
+
+3. **Class Imbalance Handling**
+   - Apply SMOTE (Synthetic Minority Oversampling Technique)
+   - Balance the training dataset while preserving test set distribution
+   - Improve model performance on minority class (attrition cases)
+
+4. **Model Training & Evaluation**
+   - Train logistic regression model with balanced data
+   - Evaluate performance using accuracy, precision, recall, F1-score
+   - Cross-validation for robust performance estimation
+
+5. **Feature Analysis & Insights**
+   - **Feature Importance**: Identify key predictors of attrition
+   - **Correlation Analysis**: Understand relationships between features
+   - **Business Interpretation**: Generate actionable insights for HR teams
+
+6. **Visualization & Reporting**
+   - Feature importance plots with meaningful names
+   - Correlation heatmaps showing feature relationships
+   - Business-friendly visualizations for stakeholder communication
 
 ## Key Technologies
 
-- **Python 3.11** (required)
-- **Data Analysis**: Pandas, NumPy
-- **Visualization**: Matplotlib, Seaborn, Plotly
-- **Machine Learning**: Scikit-learn, XGBoost, LightGBM
-- **Model Interpretation**: SHAP
-- **Notebooks**: Jupyter
+- **Python 3.x** - Primary programming language
+- **Data Processing**: Pandas, NumPy
+- **Machine Learning**: Scikit-learn, Imbalanced-learn
+- **Visualization**: Matplotlib, Seaborn
+- **Development Environment**: Jupyter Notebooks
 
-## Next Steps
+## Results & Insights
 
-1. Run the exploratory data analysis notebook
-2. Develop preprocessing pipeline
-3. Engineer relevant features
-4. Train and evaluate models
-5. Interpret results and generate insights
+The analysis provides insights into key factors driving employee attrition, including:
+- Job satisfaction and work-life balance impact
+- Compensation and career development factors
+- Demographic and role-specific patterns
+- Actionable recommendations for HR interventions
+
+## Future Enhancements
+
+- Additional model algorithms (Random Forest, XGBoost)
+- Advanced feature engineering techniques
+- Model deployment pipeline
+- Real-time prediction capabilities
+- Interactive dashboard development
 
 ## Contributing
 
