@@ -1,6 +1,6 @@
 # Employee Attrition Prediction
 
-A data science project for analyzing and predicting employee attrition using machine learning techniques.
+A data science project for analysing and predicting employee attrition using machine learning techniques.
 
 ## Project Overview
 
